@@ -54,3 +54,13 @@ function parseQueryString (parseThis){
   })
   console.log(parsed)
 }
+
+function unParseQueryString (unParse){
+  var unParseString = '';
+  var objectKeys = Object.keys(unParse);
+  objectKeys.forEach(function (getPair){
+    unParseString+=getPair+'='+unParse[getPair]+'&';
+  });
+  unParseString = unParseString.slice(0,-1);
+  return unParseString
+}

@@ -34,55 +34,67 @@
 */
 
 // YOUR CODE HERE
+
+//This was my first birthdayReminder function.  The next version sorts. It's
+//also split up and probably a lot neater.
+
+// function birthdayReminder(birthdaysArray){
+//   var today = new Date()
+//   var remindArray = []
+//   birthdaysArray.forEach(function(splitter){
+//     var nextDob = splitter.dob.split('/');
+//     nextDob.pop();
+//     console.log(today.getMonth())
+//     if(nextDob[0]<=(today.getMonth()+1)||(nextDob[0]<=(today.getMonth()+1)&&nextDob[1]<=today.getDate())){
+//       nextDob.push('2017');
+//     } else {
+//       nextDob.push('2016');
+//     }
+//   nextDob = nextDob.join('/');
+//   tempDaysUntil = daysUntilDate(nextDob);
+//   console.log(tempDaysUntil);
+//   remindArray.push(splitter.name+"'s birthday is in "+tempDaysUntil+" days.");
+//   })
+//   console.log(remindArray);
+//   return remindArray;
+// }
+
 function birthdayReminder(birthdaysArray){
-  var today = new Date()
-  var remindArray = []
-  birthdaysArray.forEach(function(splitter){
-    var nextDob = splitter.dob.split('/');
-    nextDob.pop();
-    console.log(today.getMonth())
-    if(nextDob[0]<=(today.getMonth()+1)||(nextDob[0]<=(today.getMonth()+1)&&nextDob[1]<=today.getDate())){
-      nextDob.push('2017');
-    } else {
-      nextDob.push('2016');
-    }
-  nextDob = nextDob.join('/');
-  tempDaysUntil = daysUntilDate(nextDob);
-  console.log(tempDaysUntil);
-  remindArray.push(splitter.name+"'s birthday is in "+tempDaysUntil+" days.");
-  })
-  console.log(remindArray);
+  var nextBDayArray = birthdaysArray.map(nextBDay);
+  nextBDayArray.sort(compare);
+  var remindArray = nextBDayArray.map(buildRemindArray);
   return remindArray;
 }
 
-function birthdayReminder(birthdaysArray){
+function buildRemindArray(buildInfo){
+  return buildInfo.name+"'s birthday is in "+buildInfo.nextBDay+" days.";
+}
+
+function nextBDay(splitter){
   var today = new Date()
-  var remindArray = []
-  var bdayReminderObject = {}
-  birthdaysArray.forEach(function(splitter){
-    var nextDob = splitter.dob.split('/');
-    nextDob.pop();
-    console.log(today.getMonth())
+  var nextDob = splitter.dob.split('/');
+  nextDob.pop();
     if(nextDob[0]<=(today.getMonth()+1)||(nextDob[0]<=(today.getMonth()+1)&&nextDob[1]<=today.getDate())){
       nextDob.push('2017');
     } else {
       nextDob.push('2016');
     }
   nextDob = nextDob.join('/');
-  tempDaysUntil = daysUntilDate(nextDob);
-  console.log(tempDaysUntil);
-  remindArray.push(splitter.name+"'s birthday is in "+tempDaysUntil+" days.");
-  })
-  console.log(remindArray);
-  return remindArray;
+  splitter.nextBDay = daysUntilDate(nextDob);
+  return splitter;
+}
+
+function compare(a,b) {
+  if (a.nextBDay < b.nextBDay)
+    return -1;
+  if (a.nextBDay > b.nextBDay)
+    return 1;
+  return 0;
 }
 
 function daysUntilDate (dateEntered){
   var today = Date.now();
-  // console.log(today)
   var laterDate = Date.parse(dateEntered);
-  // console.log(laterDate)
   var dateUntil = Math.ceil((laterDate-today)/(8.64*Math.pow(10,7)));
-  console.log(dateUntil);
   return dateUntil
 }

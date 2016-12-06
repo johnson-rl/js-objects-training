@@ -38,34 +38,35 @@
 */
 
 // YOUR CODE HERE
-var direction = 1;//I'm not going to code it out because it is late,
-//but you could prompt the user for direction value and then store the positive
-//and negative values to variables used by the moveBall function to get it to
-//move multiple spaces.  You would also need additional if statements to deal
-//with what happens when it is one away from the edge.  In this case it would
-//return the
+
+// This is the original moveball function that moves it only one space
+
+// var direction = 1;
+//
+// function moveBall(position, length){
+//   if(position===(length-1)){
+//     direction = -1;
+//   }
+//   if(position===0){
+//     direction = 1;
+//   }
+//   position += direction;
+//   return position;
+// }
+
+var spaces = prompt("How many spaces should I pong?");
+var direction = 1
 
 function moveBall(position, length){
-  if(position===(length-1)){
-    direction = -1;
+  for (var i=1;i<=spaces;i++){
+    if(position===(length-1)){
+      direction = -1;
+    }
+    if(position===0){
+      direction = 1;
+    }
+    position += direction;
   }
-  if(position===0){
-    direction = 1;
-  }
-  position += direction;
-  return position;
-}
-
-var direction = prompt("How many spaces should I pong?");
-var goRight = true;
-function moveBall(position, length){
-  if(position===(length-1)){
-    direction = -1;
-  }
-  if(position===0){
-    direction = 1;
-  }
-  position += direction;
   return position;
 }
 
