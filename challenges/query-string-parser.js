@@ -45,3 +45,12 @@
 */
 
 // YOUR CODE HERE
+function parseQueryString (parseThis){
+  var parsed = {};
+  var arrayOfPairs = parseThis.split('&');
+  arrayOfPairs.forEach(function(pair){
+      var toStore = pair.split('=');
+      parsed[toStore[0]] = toStore[1];
+  })
+  console.log(parsed)
+}

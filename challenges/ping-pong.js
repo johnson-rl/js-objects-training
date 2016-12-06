@@ -38,3 +38,52 @@
 */
 
 // YOUR CODE HERE
+var direction = 1;//I'm not going to code it out because it is late,
+//but you could prompt the user for direction value and then store the positive
+//and negative values to variables used by the moveBall function to get it to
+//move multiple spaces.  You would also need additional if statements to deal
+//with what happens when it is one away from the edge.  In this case it would
+//return the
+
+function moveBall(position, length){
+  if(position===(length-1)){
+    direction = -1;
+  }
+  if(position===0){
+    direction = 1;
+  }
+  position += direction;
+  return position;
+}
+
+var direction = prompt("How many spaces should I pong?");
+var goRight = true;
+function moveBall(position, length){
+  if(position===(length-1)){
+    direction = -1;
+  }
+  if(position===0){
+    direction = 1;
+  }
+  position += direction;
+  return position;
+}
+
+function pingPong(tableArray){
+  var pongIndex;
+  var newArray = [null,null,null,null];
+  var tableLength = tableArray.length;
+  var ball;
+  var newPosition;
+  tableArray.forEach(function(pongPosition){
+    if(pongPosition){
+      pongIndex = tableArray.indexOf(pongPosition);
+      pongPosition.steps++;
+      ball = pongPosition;
+      newPosition = moveBall(pongIndex,tableLength);
+    }
+  });
+  newArray[newPosition] = ball;
+  console.log(newArray);
+  return newArray;
+}

@@ -31,3 +31,24 @@
 */
 
 // YOUR CODE HERE
+var stringToCount = 'sleep'
+
+function letterCount (stringToCount){
+  var countObject = {};
+  var noUnwatnedChars = stringToCount.replace(/[^a-zA-Z]/g,'');
+  var arrayToCount = (noUnwatnedChars.toLowerCase()).split('');
+  // var alphabet = "abcdefghijklmnopqrstuvwxyz"
+  arrayToCount.forEach(function(character){
+    if (countObject[character]===undefined){
+      countObject[character] = 1;
+    } else{
+      countObject[character]++;
+    }
+  })
+  arrayToCount.forEach(function(character){
+    countObject[character] /=arrayToCount.length;
+  })
+console.log(countObject)
+}
+
+console.log(countObject)
